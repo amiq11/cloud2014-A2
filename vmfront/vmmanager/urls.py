@@ -7,4 +7,6 @@ urlpatterns = patterns('vmmanager.views',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^$', 'index'),
+    url(r'^create/$', 'create'),
+    url(r'^status/(?P<vmname>[^/]+)/$', 'status'),
 )
