@@ -1,5 +1,6 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from xml.dom.minidom import parseString
 import libvirt
 # Create your views here.
 
@@ -16,8 +17,12 @@ def index(request):
 def status(request, vmname):
     con = libvirt.open('qemu:///system')
     dom = con.lookupByName(vmname)
-    return render_to_response('vmmanager/status.html',
-                              {'dom': dom, 'info': dom.info()})
+    parsed = parseString(dom.XMLDesc(libvirt.VIR_DOMAIN_XML_SECURE))
+    return render_to_response('vmmanager/status.html', {
+							      'dom': dom,
+								  'info': dom.info,
+								  'graphics_port': parsed.getElementsByTagName('graphics')[0].getAttribute('port')
+								  })
 
 def create(request):
     return render_to_response('vmmanager/create.html')
