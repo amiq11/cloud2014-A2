@@ -1,8 +1,21 @@
+{% include 'vmmanager/header.html' %}
 <h1>VM Status</h1><br/>
-<div class="vmlist">
+<div class="sidemenu">
+<p>
+<a href="/vmmanager/status/{{dom.name}}/">status</a><br/>
+<a href="/vmmanager/vnc/{{dom.name}}/">vnc</a><br/>
+<a href="/vmmanager/status/{{dom.name}}/">status</a><br/>
+<a href="/vmmanager/status/{{dom.name}}/">status</a><br/>
+</p>
+<p>
+<a href="/vmmanager/">back to list</a><br/>
+</p>
+</div>
+
+<div class="contents">
 <table>
  <thead>
-  <tr>
+  <tr class="header">
    <th>Key</th>
    <th>Value</th>
   </tr>
@@ -22,6 +35,11 @@
  </tr>
  </tbody>
 </table>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+a
 </div>
-  
- 
+{% include 'vmmanager/footer.html' %}

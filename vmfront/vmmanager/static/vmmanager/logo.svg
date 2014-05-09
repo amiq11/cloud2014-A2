@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="182.60205"
+   height="47.169937"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="logo.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.3147924"
+     inkscape:cx="261.22881"
+     inkscape:cy="-67.426187"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:snap-global="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1056"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     fit-margin-top="5"
+     fit-margin-left="5"
+     fit-margin-right="5"
+     fit-margin-bottom="5">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2985"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       spacingx="5px"
+       spacingy="5px"
+       units="pt"
+       originx="-20.158203px"
+       originy="-278.48079px" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="レイヤー 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-20.158203,-726.71148)">
+    <g
+       id="g3089"
+       transform="matrix(1.6307822,0,0,1.6307822,-24.023258,-784.50611)">
+      <text
+         transform="scale(1.9479093,0.51337092)"
+         sodipodi:linespacing="125%"
+         id="text2991"
+         y="1854.7847"
+         x="14.036741"
+         style="font-size:25.77306175px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ff5555;fill-opacity:1;stroke:none;font-family:'メイリオ';-inkscape-font-specification:'メイリオ'"
+         xml:space="preserve"><tspan
+           style="font-size:57.9893837px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ff5555;font-family:'あずきフォント';-inkscape-font-specification:'あずきフォント Bold'"
+           y="1854.7847"
+           x="14.036741"
+           id="tspan2993"
+           sodipodi:role="line">G4</tspan></text>
+      <text
+         sodipodi:linespacing="125%"
+         id="text2987"
+         y="947.36218"
+         x="30"
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#b3b3b3;fill-opacity:1;stroke:none;font-family:'メイリオ';-inkscape-font-specification:'メイリオ'"
+         xml:space="preserve"><tspan
+           style="font-size:18px;fill:#b3b3b3"
+           y="947.36218"
+           x="30"
+           id="tspan2989"
+           sodipodi:role="line">VMManager</tspan></text>
+      <text
+         sodipodi:linespacing="125%"
+         id="text2987-2"
+         y="948.54376"
+         x="31.069157"
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:'メイリオ';-inkscape-font-specification:'メイリオ'"
+         xml:space="preserve"><tspan
+           style="font-size:18px"
+           y="948.54376"
+           x="31.069157"
+           id="tspan2989-6"
+           sodipodi:role="line">VMManager</tspan></text>
+    </g>
+  </g>
+</svg>
