@@ -6,4 +6,7 @@
 # License:  MIT License
 # Created:  2014-05-09
 #
+
+print( "Hello_yamahiro.py" )
 print( "Hello.pypy" )
+
