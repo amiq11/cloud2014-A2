@@ -6,4 +6,4 @@
 # License:  MIT License
 # Created:  2014-05-09
 #
-print( "Hello.py" )
+print( "Hello.pypy" )
