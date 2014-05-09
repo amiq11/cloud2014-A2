@@ -19,3 +19,11 @@ virConnect::getInfo 情報を出す
 
 ひとまずデザインとかは置いておいて、欲しい情報が出せるようになりましょう！！
 
+
+使えそうな関数
+  - virConnect::getinfo ホストの情報を出す？
+  - virDomain::name VMの名前を返す
+  - virDomain::info VMの情報を配列で返す（0番目の要素がstate?）
+  - virDomain::memoryStats 未検証。VMが起動していないときは"None"、起動しているときは"{}"が出ている
+  - virDomain::maxMemory VMに割り当てられた最大メモリを返す
+  - virDomain::maxVcpus VMが使えるCPUの最大数を返す
