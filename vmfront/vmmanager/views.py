@@ -22,6 +22,9 @@ def status(request, vmname):
                               {
                                   'dom': dom,
                                   'info': dom.info,
+                                  'mem': dom.memoryStats,
+                                  'max_mem': dom.maxMemory,
+                                  'getinfo': con.getInfo,
                                   'graphics_port': parsed.getElementsByTagName('graphics')[0].getAttribute('port')
                               })
 
