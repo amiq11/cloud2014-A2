@@ -9,11 +9,21 @@
 #
 import libvirt
 
+_hostname = None
+
+def get_virt_hostname():
+    return _hostname
+
 def create_virConnect():
+    global _hostname
     con = None
     try: 
-        con = libvirt.open('qemu+tls://g4hv.exp.ci.i.u-tokyo.ac.jp/system')
+        path = 'qemu+tls://g4hv.exp.ci.i.u-tokyo.ac.jp/system'
+        con = libvirt.open(path)
+        _hostname = path
     except:
-        con = libvirt.open('qemu:///system')
+        path = 'qemu:///system'
+        con = libvirt.open(path)
+        _hostname = path
 
     return con

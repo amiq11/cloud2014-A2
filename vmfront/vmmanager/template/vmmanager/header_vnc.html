@@ -1,0 +1,16 @@
+{% load staticfiles %}
+<html>
+<head>
+  <link href="{% static 'vmmanager/style.css' %}" rel="stylesheet" type="text/css"/>
+  <link href="{% static 'vmmanager/include/base.css' %}" rel="stylesheet"
+  type="text/css"/>
+<script src="{% static 'vmmanager/include/util.js' %}"></script>
+<script type="text/javascript">
+INCLUDE_URI="{% static 'vmmanager/include/' %}"
+</script>
+
+</head>
+<body>
+<header>
+  <img src="{% static 'vmmanager/logo.png' %}" alt="logo"/><br/>
+</header>
