@@ -1,2 +1,80 @@
 <h1>VM Create</h1>
-つくっちゃうぞ(´◔౪◔)۶ﾖｯｼｬ!
+
+
+<form id="vmcreate" action="." method="POST">
+{% csrf_token %}
+<table>
+<tbody>
+	<tr>
+	<th>VM名</th>
+	<td><input type="text" /></td>	
+	</tr>
+	<tr>	
+	<th>メモリ容量</th>
+	<td>
+	<select name="memory" style="width:50px">
+		<option value="">--</option>
+		<option value="256">256</option>
+		<option value="512">512</option>
+		<option value="1024">1024</option>
+	</select>
+	<span>MB</span>
+	</td>
+	</tr>
+	<tr>
+	<th>CPU数</th>
+	<td>
+	<select name="vcpu" style="width:50px">
+		<option value="">--</option>
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+	</select>
+	</td>
+	</tr>
+	<tr>
+	<th>ディスク容量</th>
+	<td>
+	<select name="disk" style="width:50px">
+		<option value="">--</option>
+		<option value="2">2</option>
+		<option value="5">5</option>
+		<option value="10">10</option>
+		<option value="20">20</option>
+	</select>
+	<span>GB</span>
+	</td>
+	</tr>
+	<tr>
+	<th>OS</th>
+	<td>
+	<select name="os" style="width:50px">
+		<option></option>
+		<option></option>
+	</td>
+	</tr>
+	<tr>
+	<th colspan="2"><input type="button" value="作成" onclick="validate()"/></th>
+	</tr>
+	
+</tbody>
+</table>
+</form>
+
+
+<script type="text/javascript">
+<!--
+/*validate*/
+function validate(){
+
+	bool = window.confirm("作っちゃう？？");
+	if(bool)
+		document.getElementById('vmcreate').submit();
+	else
+		;
+
+	return;
+}
+
+-->
+</script>
