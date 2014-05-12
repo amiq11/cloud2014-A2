@@ -1,6 +1,8 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from xml.dom.minidom import parseString
+from django.core.context_processors import csrf
+
 import libvirt
 # Create your views here.
 
@@ -26,4 +28,7 @@ def status(request, vmname):
                               })
 
 def create(request):
-    return render_to_response('vmmanager/create.html')
+    data = {}
+    data.update(csrf(request))
+    return render_to_response('vmmanager/create.html', data)
+
