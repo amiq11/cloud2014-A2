@@ -2,7 +2,7 @@
 <div id="content">
 <h1>VM Createマンの部屋</h1>
 <ul class="note">
-	<li><span class="needed"></span>は入力必須</li>
+	<li><span class="needed"></span>は入力必須でやんす</li>
 </ul>
 <form id="vmcreate" action="." method="POST">
 {% csrf_token %}
@@ -10,7 +10,7 @@
 <tbody>
 	<tr>
 	<th>VM名<span class="needed"></span></th>
-	<td><input name="name" type="text" /></td>	
+	<td><input name="name" type="text" value="" /></td>	
 	</tr>
 	<tr>	
 	<th>メモリ容量<span class="needed"></span></th>
@@ -74,7 +74,7 @@
 /*validate*/
 function validate(){
 
-	input = document.getElementsByTagName("input");
+	input = document.getElementsByName("name");
 	select = document.getElementsByTagName("select");
 	valid = true;
 	for(var i = 0; i < select.length; i++) {
@@ -86,6 +86,7 @@ function validate(){
 	if (input[0].value == "") {
 		valid = false;
 	}
+	
 	if (!valid) {
 		alert("全部必須だよ！この豚野郎！！");
 		return ;
