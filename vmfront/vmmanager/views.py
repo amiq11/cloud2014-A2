@@ -52,9 +52,10 @@ def create(request):
                                 pass
         else:
                 form = VMForm()
-		c = {}
-		c.update({"XML" : ""})
-        c.update({"form": form})
+		#c = {}
+		#c.update({"XML" : ""})
+        #c.update({"form": form})
+	c = {}
         return render_to_response('vmmanager/create.html', c,
                                                           context_instance=RequestContext(request))
 
