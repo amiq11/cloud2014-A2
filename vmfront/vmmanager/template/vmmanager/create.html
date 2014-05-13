@@ -1,6 +1,5 @@
+{% include 'vmmanager/header.html' %}
 <h1>VM Create</h1>
-
-
 <form id="vmcreate" action="." method="POST">
 {% csrf_token %}
 <table>
@@ -48,9 +47,12 @@
 	<tr>
 	<th>OS</th>
 	<td>
-	<select name="os" style="width:50px">
-		<option></option>
-		<option></option>
+	<select name="os">
+		<option value="">--</option>
+		<option value="ubuntu">Ubuntu 12.04 LTS Server</option>
+		<option value="debian">Debian </option>
+		<option value="freebsd">FreeBSD</option>
+		<option value="centos">CentOS</option>
 	</td>
 	</tr>
 	<tr>
@@ -61,6 +63,7 @@
 </table>
 </form>
 
+{% include 'vmmanager/footer.html' %}
 
 <script type="text/javascript">
 <!--
