@@ -58,7 +58,7 @@
 	</td>
 	</tr>
 	<tr>
-	<th colspan="2"><input type="button" value="作成" onclick="validate()"/></th>
+	<th colspan="2"><input type="button" value="VM作る!" onclick="validate()"/></th>
 	</tr>
 	
 </tbody>
@@ -72,7 +72,7 @@
 /*validate*/
 function validate(){
 
-	bool = window.confirm("作っちゃう？？");
+	bool = window.confirm("本当に作っちゃう？？");
 	if(bool)
 		document.getElementById('vmcreate').submit();
 	else
