@@ -27,7 +27,7 @@
   </tr>
  <tr>
   <th>State</th>
-  <th>{{ info.0 }}</th>
+  <th>{{ info.1 }}</th>
  </tr>
  <tr>
   <th>mem</th>
@@ -51,11 +51,16 @@
  </tr>
  </tbody>
 </table>
+<form method="post" action="/vmmanager/status/{{dom.name}}/">
+  <input type="hidden" name="shutdown" value="true">
+  {% csrf_token %}
+  <input type="submit" value="shutdown">
+</form> 
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-a
+
 </div>
 {% include 'vmmanager/footer.html' %}
