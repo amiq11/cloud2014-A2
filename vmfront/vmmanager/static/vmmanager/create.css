@@ -1,0 +1,17 @@
+#content {
+	position: relative;
+	margin-top:100px;
+}
+
+#vmcreate table, tbody, tr, th, td {
+	border: solid 1px #222222;
+}
+
+#vmcreate th {
+	background-color: #efefef;   
+}
+
+#vmcreate th:last-child {
+	background-color: #cccccc;
+	height: 40px;
+}

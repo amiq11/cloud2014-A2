@@ -3,6 +3,7 @@ from django.template import RequestContext
 from xml.dom.minidom import parseString
 from django.core.context_processors import csrf
 from django import forms
+from django.http import HttpResponse
 
 import libvirt
 # Create your views here.
@@ -33,7 +34,8 @@ class VMForm(forms.Form):
         memory = forms.ChoiceField(choices=[(256, "256"), (512, "512"), (1024, "1024")])
         vcpu = forms.ChoiceField(choices=[(1, "1"), (2, "2"), (3, "3")])
         disk = forms.ChoiceField(choices=[(2, "2"), (5, "5"), (10, "10"), (20, "20")])
-        os = forms.ChoiceField(choices=[("", "")])
+        os = forms.ChoiceField(choices=[("freebsd", "FreeBSD"), ("ubuntu", "Ubuntu"), ("centos", "CentOS"), ("debian", "Debian")])
+	pass
 
 def create(request):
         if request.method == "POST":
@@ -42,7 +44,6 @@ def create(request):
                         # code of creating vm
                         # and redirecting to vnc
                         con = libvirt.open('qemu:///system')
-			print("aaaaa")
                         domain = con.defineXML(D_XML % form.cleaned_data)
                         status = domain.create()
                         if status != -1:
@@ -51,15 +52,16 @@ def create(request):
                                 pass
         else:
                 form = VMForm()
-        c = {"form": form}
+		c = {}
+		c.update({"XML" : ""})
+        c.update({"form": form})
         return render_to_response('vmmanager/create.html', c,
                                                           context_instance=RequestContext(request))
 
 
-
 D_XML = """\
 <domain type="kvm"> <!-- Domain Type -->
-        <name>(%name)s</name> <!-- name for vm -->
+        <name>%(name)s</name> <!-- name for vm -->
         <uuid></uuid> <!-- global identifier for virtual machines. if define/create a new machine, a random UUID is generated-->
 
         <os> <!-- Bootloader -->
@@ -68,9 +70,9 @@ D_XML = """\
                 <boot dev='hd' />
         </os>
 
-        <vcpu>(%vcpu)d</vcpu> <!-- CPU allocation -->
-        <memory unit='MiB'>(%memory)d</memory> <!-- Maximum Memory Allocation Size -->
-        <currentMemory unit='MiB'>(%memory)d</currentMemory> <!-- Current Memory Allocation -->
+        <vcpu>%(vcpu)s</vcpu> <!-- CPU allocation -->
+        <memory unit='MiB'>%(memory)s</memory> <!-- Maximum Memory Allocation Size -->
+        <currentMemory unit='MiB'>%(memory)s</currentMemory> <!-- Current Memory Allocation -->
 
         <devices> <!-- devices provided to the guest domain -->
                 <emulator>/usr/bin/kvm</emulator> <!--  -->
@@ -93,3 +95,4 @@ D_XML = """\
 
 </domain>
 """\
+
