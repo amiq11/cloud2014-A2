@@ -3,6 +3,11 @@
 	margin-top:100px;
 }
 
+#content h1 {
+	font-size: 20px;
+	margin-left: 5px;
+}
+
 #vmcreate table, tbody, tr, th, td {
 	border: solid 1px #888888;
 	border-collapse: collapse;
@@ -18,13 +23,25 @@
 
 #vmcreate th {
 	background-color: #efefef;   
+	font-size: 12px;
+	text-align: left;
 }
 
 #vmcreate th:last-child {
 	background-color: #dddddd;
 	height: 40px;
+	text-align:center;
 }
 
 #vmcreate tr {
 	;
+}
+
+.needed:before {
+	content:"*";
+	color: red;
+}
+
+.note li{
+	display:block;
 }
