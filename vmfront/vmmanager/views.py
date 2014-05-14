@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from xml.dom.minidom import parseString
 import libvirt
 # Create your views here.
@@ -21,11 +22,13 @@ def status(request, vmname):
     parsed = parseString(dom.XMLDesc(libvirt.VIR_DOMAIN_XML_SECURE))
 
     #if request.method == 'POST':
-    if request.POST["shutdown"] == "true":
-        dom.destroy()
-        return HttpResponseRedirect("http://127.0.0.1:8000/vmmanager/")
-     
-    else:
+    try:
+        if request.POST["shutdown"] == "true":
+            dom.destroy()
+            return HttpResponseRedirect(reverse('vmmanager.views.index'))
+        
+    except KeyError:
+        #context_instance=RequestContext(request, 
         return render_to_response('vmmanager/status.html',
                                   context_instance=RequestContext(request, {
                                   'dom': dom,
