@@ -7,7 +7,7 @@ import libvirt
 # Create your views here.
 
 def index(request):
-    con = libvirt.open('qemu:///system')
+    con = libvirt.open('qemu+tls://g4hv.exp.ci.i.u-tokyo.ac.jp/system')
     vmdoms = []
     for id in con.listDomainsID():
         dom = con.lookupByID(id)
@@ -17,7 +17,7 @@ def index(request):
                               context_instance=RequestContext(request))
 
 def status(request, vmname):
-    con = libvirt.open('qemu:///system')
+    con = libvirt.open('qemu+tls://g4hv.exp.ci.i.u-tokyo.ac.jp/system')
     dom = con.lookupByName(vmname)
     parsed = parseString(dom.XMLDesc(libvirt.VIR_DOMAIN_XML_SECURE))
 
