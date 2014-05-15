@@ -35,15 +35,34 @@ class VMForm(forms.Form):
         vcpu = forms.ChoiceField(choices=[(1, "1"), (2, "2"), (3, "3")])
         disk = forms.ChoiceField(choices=[(2, "2"), (5, "5"), (10, "10"), (20, "20")])
         os = forms.ChoiceField(choices=[("freebsd", "FreeBSD"), ("ubuntu", "Ubuntu"), ("centos", "CentOS"), ("debian", "Debian")])
-	pass
+		
+	def clean_name(self):
+		# Custom validation
+		# Check overlapping of domain name
+		con = libvirt.open('qemu:///system')
+		vm_names = []
+		for id in con.listDomainsID():
+			dom = con.lookupByID(id)
+			vm_names.append(dom.name())
+		vm_names.append(con.listDefinedDomains())
+		if self.cleaned_data['name'] in vm_names:
+				raise forms.ValidationError(u'Overlapping domain name')
+		else:
+				return self.cleaned_data['name']
 
 def create(request):
         if request.method == "POST":
                 form = VMForm(request.POST)
                 if form.is_valid():
-                        # code of creating vm
-                        # and redirecting to vnc
                         con = libvirt.open('qemu:///system')
+
+			# Create Volume
+			for name in  con.listStoragePools() :
+					pool = con.storagePoolLookupByName(name)
+
+			pool.createXML(V_XML % form.cleaned_data, 0)
+
+			# Create Domain
                         domain = con.defineXML(D_XML % form.cleaned_data)
                         status = domain.create()
                         if status != -1:
@@ -52,13 +71,26 @@ def create(request):
                                 pass
         else:
                 form = VMForm()
-		#c = {}
-		#c.update({"XML" : ""})
-        #c.update({"form": form})
 	c = {}
         return render_to_response('vmmanager/create.html', c,
                                                           context_instance=RequestContext(request))
 
+V_XML = """\
+    <volume>
+        <name>%(name)s.img</name>
+        <allocation>0</allocation>
+        <capacity unit="G">%(disk)s</capacity>
+      <!--  <target>
+          <path>/var/lib/virt/images/%(name)s.img</path>
+          <permissions>
+            <owner>107</owner>
+            <group>107</group>
+            <mode>0744</mode>
+            <label>virt_image_t</label>
+          </permissions>
+        </target> -->
+      </volume>
+"""\
 
 D_XML = """\
 <domain type="kvm"> <!-- Domain Type -->
@@ -78,7 +110,7 @@ D_XML = """\
         <devices> <!-- devices provided to the guest domain -->
                 <emulator>/usr/bin/kvm</emulator> <!--  -->
                 <disk type='file' device='disk'> <!-- type:underlying source for the disk, device:how the disk is exposed to the guest OS -->
-                        <source file='/var/lib/libvirt/images/sparse.img' />
+                        <source file='/var/lib/libvirt/images/%(name)s.img' />
                         <target dev='hda' />
                 </disk>
                 <disk type='file' device='cdrom'>
