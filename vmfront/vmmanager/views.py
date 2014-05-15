@@ -21,8 +21,12 @@ def status(request, vmname):
     #con = libvirt.open('qemu+tls://g4hv.exp.ci.i.u-tokyo.ac.jp/system')
     con = libvirt.open('qemu:///system')
     dom = con.lookupByName(vmname)
-    dict = {"a":1, "b":2}
     parsed = parseString(dom.XMLDesc(libvirt.VIR_DOMAIN_XML_SECURE))
+
+    if dom.info()[0] == 1:
+        maxVcpus = dom.maxVcpus()
+    else:
+        maxVcpus = None
 
     try:
         if request.POST["shutdown"] == "true":
@@ -38,7 +42,7 @@ def status(request, vmname):
                                   'state': dom.state(0),
                                   'memoryStats': dom.memoryStats(),
                                   'maxMemory': dom.maxMemory(),
-				  'maxVcpus': dom.maxVcpus(),
+				  'maxVcpus': maxVcpus,
                                   'vcpus': dom.vcpus(),
                                   'conGetMemoryStats': con.getMemoryStats(0,0),
                                   'conGetCPUStats': con.getCPUStats(0,0),
