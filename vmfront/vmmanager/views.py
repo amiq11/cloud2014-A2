@@ -24,8 +24,13 @@ def status(request, vmname):
     parsed = parseString(dom.XMLDesc(libvirt.VIR_DOMAIN_XML_SECURE))
 
     if dom.info()[0] == 1:
+        vm_state = "running"
         maxVcpus = dom.maxVcpus()
+    elif dom.info()[0] == 5:
+        vm_state = "shut off"
+        maxVcpus = None
     else:
+        vm_state = dom.info()[0]
         maxVcpus = None
 
     try:
@@ -39,6 +44,7 @@ def status(request, vmname):
                                   context_instance=RequestContext(request, {
                                   'dom': dom,
                                   'info': dom.info(),
+                                  'vm_state': vm_state,
                                   'state': dom.state(0),
                                   'memoryStats': dom.memoryStats(),
                                   'maxMemory': dom.maxMemory(),
