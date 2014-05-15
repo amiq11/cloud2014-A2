@@ -77,8 +77,10 @@
 </table>
 <form method="post" action="/vmmanager/status/{{dom.name}}/">
   <input type="hidden" name="shutdown" value="true">
+  <input type="hidden" name="PowerON" value="true">
   {% csrf_token %}
   <input type="submit" value="shutdown">
+  <input type="submit" value="PowerON">
 </form> 
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>

@@ -13,6 +13,11 @@ def index(request):
     for name in con.listDefinedDomains():
         dom = con.lookupByName(name)
         vmdoms.append(dom)
+
+    for id in con.listDomainsID():
+        dom = con.lookupByID(id)
+        vmdoms.append(dom)
+        
     return render_to_response('vmmanager/index.html',
                               {'vmdoms': vmdoms},
                               context_instance=RequestContext(request))
