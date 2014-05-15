@@ -21,34 +21,58 @@
   </tr>
   </thead>
  <tbody>
- <tr>
-  <th>Name</th>
-  <th>{{ dom.name }}</th>
+  <tr>
+    <th>Name</th>
+    <th>{{ dom.name }}</th>
   </tr>
- <tr>
-  <th>State</th>
-  <th>{{ info.0 }}</th>
- </tr>
- <tr>
-  <th>mem</th>
-  <th>{{ mem }}</th>
- </tr>
- <tr>
-  <th>maxMem</th>
-  <th>{{ max_mem }}</th>
- </tr>
- <tr>
-  <th>maxCPU</th>
-  <th>{{ max_cpu }}</th>
- </tr>
- <tr>
-  <th>getinfo</th>
-  <th>{{ getinfo }}</th>
- </tr>
- <tr>
-  <th>VNC</th>
-  <th>{{ graphics_port }}</th>
- </tr>
+  <tr>
+    <th>State</th>
+    <th>{{ vm_state }}</th>
+  </tr>
+  <tr>
+    <th>maxMemory</th>
+    <th>{{ maxMemory }} kB</th>
+  </tr>
+  <tr>
+    <th>usedMem</th>
+    <th>{{ "(TODO)" }}</th>
+  </tr>
+  <tr>
+    <th>maxVcpus</th>
+    <th>{{ maxVcpus }}</th>
+  </tr>
+  <tr>
+    <th>VNC</th>
+    <th>{{ graphics_port }}</th>
+  </tr>
+
+  <tr> <th> </br> </th> </tr>
+  <!-- for reference -->
+  <tr>
+    <th>info</th>
+    <th>{{ info }}</th>
+  </tr>
+  <tr>
+  <tr>
+    <th>state</th>
+    <th>{{ state }}</th>
+  </tr>
+  <tr>
+    <th>memoryStats</th>
+    <th>{{ memoryStats }}</th>
+  </tr>
+  <tr>
+    <th>vcpus</th>
+    <th>{{ vcpus }}</th>
+  </tr>
+  <tr>
+    <th>conGetMemoryStats</th>
+    <th>{{ conGetMemoryStats }}</th>
+  </tr>
+  <tr>
+    <th>conGetCPUStats</th>
+    <th>{{ conGetCPUStats }}</th>
+  </tr>
  </tbody>
 </table>
 <form method="post" action="/vmmanager/status/{{dom.name}}/">

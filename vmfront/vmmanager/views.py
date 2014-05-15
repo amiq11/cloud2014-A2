@@ -23,6 +23,16 @@ def status(request, vmname):
     dom = con.lookupByName(vmname)
     parsed = parseString(dom.XMLDesc(libvirt.VIR_DOMAIN_XML_SECURE))
 
+    if dom.info()[0] == 1:
+        vm_state = "running"
+        maxVcpus = dom.maxVcpus()
+    elif dom.info()[0] == 5:
+        vm_state = "shut off"
+        maxVcpus = None
+    else:
+        vm_state = dom.info()[0]
+        maxVcpus = None
+
     try:
         if request.POST["shutdown"] == "true":
             dom.destroy()
@@ -33,11 +43,15 @@ def status(request, vmname):
         return render_to_response('vmmanager/status.html',
                                   context_instance=RequestContext(request, {
                                   'dom': dom,
-                                  'info': dom.info,
-                                  'mem': dom.memoryStats,
-                                  'max_mem': dom.maxMemory,
-				  'max_cpu': dom.maxVcpus,
-                                  'getinfo': con.getInfo,
+                                  'info': dom.info(),
+                                  'vm_state': vm_state,
+                                  'state': dom.state(0),
+                                  'memoryStats': dom.memoryStats(),
+                                  'maxMemory': dom.maxMemory(),
+				  'maxVcpus': maxVcpus,
+                                  'vcpus': dom.vcpus(),
+                                  'conGetMemoryStats': con.getMemoryStats(0,0),
+                                  'conGetCPUStats': con.getCPUStats(0,0),
                                   'graphics_port': parsed.getElementsByTagName('graphics')[0].getAttribute('port')
                               }))
 

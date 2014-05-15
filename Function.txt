@@ -21,9 +21,21 @@ virConnect::getInfo 情報を出す
 
 
 使えそうな関数
-  - virConnect::getinfo ホストの情報を出す？
-  - virDomain::name VMの名前を返す
-  - virDomain::info VMの情報を配列で返す（0番目の要素がstate?）
-  - virDomain::memoryStats 未検証。VMが起動していないときは"None"、起動しているときは"{}"が出ている
-  - virDomain::maxMemory VMに割り当てられた最大メモリを返す
-  - virDomain::maxVcpus VMが使えるCPUの最大数を返す
+  - virConnect::getinfo() ホストの情報を出す？
+  - virConnect::getCPUStats(CPUNum, 0) ホストのCPUの情報を出す
+  - virConnect::getMemoryStats(0, 0) ホストのメモリの情報を出す
+  - virConnect::getMaxVcpus(None) 16が帰ってきたからホストの最大仮想CPU数？
+
+  - virDomain::name() VMの名前を返す
+  - virDomain::info() VMの情報を配列で返す（0番目の要素がstateを表す）
+  - virDomain::state(0) よくわからん
+  - virDomain::memoryStats() VMが起動していないときは"None"、起動しているときは"{}"が出ている。本来はメモリ使用量とかが辞書型で出てくれる気がする。バグな気がする。
+  - virDomain::CPUStats() （ありません）
+  - virDomain::maxMemory() VMに割り当てられた最大メモリを返す
+  - virDomain::maxVcpus() VMが使えるCPUの最大数を返す
+  - virDomain::vcpus() ゲストのCPUの状態を返す
+
+# メモリ使用率について
+vcpusの返り値の[0][n][2]の要素はn番目のVCPUの使用時間[ナノ秒]らしい。
+ページを更新し続けてみると単調増加しているので、累計の使用時間っぽい。
+一定間隔でこの値を計測して割り算するとCPU使用率が求められる？
