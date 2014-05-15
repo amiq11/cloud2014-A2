@@ -52,8 +52,6 @@ def status(request, vmname):
                                   'vcpus': dom.vcpus(),
                                   'conGetMemoryStats': con.getMemoryStats(0,0),
                                   'conGetCPUStats': con.getCPUStats(0,0),
-                                  'conGetInfo': con.getInfo(),
-                                  'conGetMaxVcpus': con.getMaxVcpus(None),
                                   'graphics_port': parsed.getElementsByTagName('graphics')[0].getAttribute('port')
                               }))
 
