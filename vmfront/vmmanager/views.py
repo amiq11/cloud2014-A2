@@ -11,8 +11,7 @@ def index(request):
     return render_to_response('vmmanager/index.html')
 
 def status(request, vmname):
-    #con = libvirt.open('qemu+tls://g4hv.exp.ci.i.u-tokyo.ac.jp/system')
-    con = libvirt.open('qemu:///system')
+    con = libvirt.open('qemu+tls://g4hv.exp.ci.i.u-tokyo.ac.jp/system')
     dom = con.lookupByName(vmname)
     parsed = parseString(dom.XMLDesc(libvirt.VIR_DOMAIN_XML_SECURE))
 
@@ -40,8 +39,7 @@ def create(request):
 
 
 def index_menu(request):
-    #con = libvirt.open('qemu+tls://g4hv.exp.ci.i.u-tokyo.ac.jp/system')
-    con = libvirt.open('qemu:///system')
+    con = libvirt.open('qemu+tls://g4hv.exp.ci.i.u-tokyo.ac.jp/system')
     vmdoms = []
     for id in con.listDomainsID():
         dom = con.lookupByID(id)
