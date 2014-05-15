@@ -42,6 +42,10 @@ def status(request, vmname):
         if request.POST["shutdown"] == "true":
             dom.destroy()
             return HttpResponseRedirect(reverse('vmmanager.views.index'))
+
+#    except request.POST["PowerON"] == "true":
+#        dom.start()
+#        return HttpResponseRedirect(reverse('vmmanager.views.index'))
         
     except KeyError:
         
@@ -59,6 +63,12 @@ def status(request, vmname):
                                   'conGetCPUStats': con.getCPUStats(0,0),
                                   'graphics_port': parsed.getElementsByTagName('graphics')[0].getAttribute('port')
                               }))
+    
+    else:
+        if request.POST["PowerON"] == "true":
+            dom.create()
+            return HttpResponseRedirect(reverse('vmmanager.views.index'))
+        
 
 def create(request):
     return render_to_response('vmmanager/create.html')
