@@ -1,3 +1,13 @@
+{% load staticfiles %}
+<html>
+<head>
+  <link href="{% static 'vmmanager/style.css'%}" rel="stylesheet" type="text/css"/>
+</head>
+<body background="{% static 'vmmanager/b009.jpg' %}">
+
+
+
+
 <h1>VM Status</h1><br/>
 <div class="sidemenu">
 <p>
@@ -5,9 +15,6 @@
 <a href="/vmmanager/vnc/{{dom.name}}/">vnc</a><br/>
 <a href="/vmmanager/status/{{dom.name}}/">status</a><br/>
 <a href="/vmmanager/status/{{dom.name}}/">status</a><br/>
-</p>
-<p>
-<a href="/vmmanager/">back to list</a><br/>
 </p>
 </div>
 
@@ -29,15 +36,40 @@
   <th>{{ info.0 }}</th>
  </tr>
  <tr>
+  <th>mem</th>
+  <th>{{ mem }}</th>
+ </tr>
+ <tr>
+  <th>maxMem</th>
+  <th>{{ max_mem }}</th>
+ </tr>
+ <tr>
+  <th>maxCPU</th>
+  <th>{{ max_cpu }}</th>
+ </tr>
+ <tr>
+  <th>getinfo</th>
+  <th>{{ getinfo }}</th>
+ </tr>
+ <tr>
   <th>VNC</th>
   <th>{{ graphics_port }}</th>
  </tr>
  </tbody>
 </table>
+<form method="post" action="/vmmanager/status/{{dom.name}}/">
+  <input type="hidden" name="shutdown" value="true">
+  {% csrf_token %}
+  <input type="submit" value="shutdown">
+</form> 
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-a
+
 </div>
+
+
+</body>
+</html>
