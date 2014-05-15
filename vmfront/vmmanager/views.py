@@ -21,6 +21,7 @@ def status(request, vmname):
     #con = libvirt.open('qemu+tls://g4hv.exp.ci.i.u-tokyo.ac.jp/system')
     con = libvirt.open('qemu:///system')
     dom = con.lookupByName(vmname)
+    dict = {"a":1, "b":2}
     parsed = parseString(dom.XMLDesc(libvirt.VIR_DOMAIN_XML_SECURE))
 
     try:
@@ -33,11 +34,16 @@ def status(request, vmname):
         return render_to_response('vmmanager/status.html',
                                   context_instance=RequestContext(request, {
                                   'dom': dom,
-                                  'info': dom.info,
-                                  'mem': dom.memoryStats,
-                                  'max_mem': dom.maxMemory,
-				  'max_cpu': dom.maxVcpus,
-                                  'getinfo': con.getInfo,
+                                  'info': dom.info(),
+                                  'state': dom.state(0),
+                                  'memoryStats': dom.memoryStats(),
+                                  'maxMemory': dom.maxMemory(),
+				  'maxVcpus': dom.maxVcpus(),
+                                  'vcpus': dom.vcpus(),
+                                  'conGetMemoryStats': con.getMemoryStats(0,0),
+                                  'conGetCPUStats': con.getCPUStats(0,0),
+                                  'conGetInfo': con.getInfo(),
+                                  'conGetMaxVcpus': con.getMaxVcpus(None),
                                   'graphics_port': parsed.getElementsByTagName('graphics')[0].getAttribute('port')
                               }))
 
