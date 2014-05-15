@@ -9,4 +9,9 @@ urlpatterns = patterns('vmmanager.views',
     url(r'^$', 'index'),
     url(r'^create/$', 'create'),
     url(r'^status/(?P<vmname>[^/]+)/$', 'status'),
+
+    url(r'^index_menu/$', 'index_menu'),
+    url(r'^index_top/$', 'index_top'),
+
+
 )
