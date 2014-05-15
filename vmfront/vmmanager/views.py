@@ -27,3 +27,17 @@ def status(request, vmname):
 
 def create(request):
     return render_to_response('vmmanager/create.html')
+
+
+
+
+
+
+def index_menu(request):
+    return render_to_response('vmmanager/index_menu.html')
+
+def index_top(request):
+    return render_to_response('vmmanager/index_top.html')
+
+
+
