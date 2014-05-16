@@ -82,7 +82,8 @@ def status(request, vmname):
                                   'vcpus': dom.vcpus(),
                                   'conGetMemoryStats': con.getMemoryStats(0,0),
                                   'conGetCPUStats': con.getCPUStats(0,0),
-                                  'graphics_port': graphics_port
+                                  'graphics_port': graphics_port,
+                                  'OSType': dom.OSType(),
                               }))
     
 
