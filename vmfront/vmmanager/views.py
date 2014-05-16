@@ -174,7 +174,7 @@ D_XML = """\
                         <target dev='hda' />
                 </disk>
                 <disk type='file' device='cdrom'>
-                        <source file='/var/shared/debian-7.5.0-amd64-netinst.iso' />
+                        <source file='/var/shared/%(os)s.iso' />
                         <target dev='hda' />
                         <readonly/>
                         <address type='drive' controller='0' bus='1' target='0' unit='0'/>
