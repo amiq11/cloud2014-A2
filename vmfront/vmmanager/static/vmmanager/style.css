@@ -1,5 +1,6 @@
 @charset 'utf-8'
 
+
 p {
     display: block;
     font-size: 13pt;
@@ -33,3 +34,10 @@ header {
 tr.header {
     background-color: #E6E6FA;
 }
+
+
+body {
+	background-image: url(b009.jpg);
+}
+
+

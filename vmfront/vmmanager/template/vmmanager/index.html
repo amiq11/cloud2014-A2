@@ -1,16 +1,28 @@
-<h1>VM Manager</h1>
+{% load staticfiles %}
 
-<table>
-{% for dom in vmdoms %}
- <tr>
-  <td><a href="/vmmanager/status/{{ dom.name }}/">{{ dom.name }}</a></td>
-  {% if dom.info.0 == 1 %}<td>running</td>{% endif %}
-  {% if dom.info.0 == 5 %}<td>shut off</td>{% endif %}
- </tr>
-{% endfor %}
-</table>
 
-<form action="/vmmanager/create/" method="post">
-{% csrf_token %}
-<input type="submit" value="Create New VM" />
-</form>
+<HTML>
+	
+	<HEAD>
+		<TITLE>Cloud Group4</TITLE>
+		<LINK rel="stylesheet" type="text/css" href="{% static 'vmmanager/style.css' %}">
+	</HEAD>
+	
+	
+	<FRAMESET rows="50,*,20" cols="*" frameborder="1" border="1" framespacing="0" >
+		
+		<FRAME src="{% static 'vmmanager/header.html' %}" name="header" marginwidth="0" marginheight="0" frameBorder="1" noresize scrolling="NO" allowtransparency="true">
+		
+		<FRAMESET cols="200,*" rows="*" frameborder="1" border="1" framespacing="0" >
+			<FRAME src="/vmmanager/index_menu/"	name="menu" marginwidth="0" marginheight="0" frameBorder="1" noresize scrolling="NO" allowtransparency="true" target="main">
+			<FRAME src="/vmmanager/index_top/"		name="main" marginwidth="0" marginheight="0" frameBorder="0" noresize allowtransparency="true">
+			<BODY>
+				<NOFRAMES><P>This page requires a browser which supports FRAME.</P></NOFRAMES>
+				
+			</BODY>
+		</FRAMESET>
+		
+		<FRAME src="{% static 'vmmanager/footer.html' %} " name="footer" marginwidth="0" marginheight="0" frameBorder="1" noresize scrolling="NO" allowtransparency="true">
+	
+	</FRAMESET>
+</HTML>

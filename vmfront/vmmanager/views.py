@@ -3,12 +3,18 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from xml.dom.minidom import parseString
+from vmmanager import create_virConnect
 import libvirt
+from vmmanager.vnc import display
+
 # Create your views here.
 
+
 def index(request):
-    #con = libvirt.open('qemu+tls://g4hv.exp.ci.i.u-tokyo.ac.jp/system')
-    con = libvirt.open('qemu:///system')
+    return render_to_response('vmmanager/index.html')
+
+def index_menu(request):
+    con = create_virConnect()
     vmdoms = []
     for name in con.listDefinedDomains():
         dom = con.lookupByName(name)
@@ -18,13 +24,17 @@ def index(request):
         dom = con.lookupByID(id)
         vmdoms.append(dom)
         
-    return render_to_response('vmmanager/index.html',
+    return render_to_response('vmmanager/index_menu.html',
                               {'vmdoms': vmdoms},
                               context_instance=RequestContext(request))
 
+def index_top(request):
+    return render_to_response('vmmanager/index_top.html')
+
 def status(request, vmname):
-    #con = libvirt.open('qemu+tls://g4hv.exp.ci.i.u-tokyo.ac.jp/system')
-    con = libvirt.open('qemu:///system')
+    
+    con = create_virConnect()
+    
     dom = con.lookupByName(vmname)
     parsed = parseString(dom.XMLDesc(libvirt.VIR_DOMAIN_XML_SECURE))
 
@@ -42,11 +52,13 @@ def status(request, vmname):
     if request.method == "POST":
 
         if 'PowerON' in request.POST:
-            dom.create()
-            return HttpResponseRedirect(reverse('vmmanager.views.index'))
+            if vm_state == "shut off":
+                dom.create()
+            return HttpResponseRedirect(reverse('vmmanager.views.index_top'))
         elif 'shutdown' in request.POST:
-            dom.destroy()
-            return HttpResponseRedirect(reverse('vmmanager.views.index'))
+            if vm_state == "running":
+                dom.destroy()
+            return HttpResponseRedirect(reverse('vmmanager.views.index_top'))
         
     
     #try:
@@ -73,3 +85,6 @@ def status(request, vmname):
 
 def create(request):
     return render_to_response('vmmanager/create.html')
+
+def vnc(request, vmname):
+    return display(request, vmname)

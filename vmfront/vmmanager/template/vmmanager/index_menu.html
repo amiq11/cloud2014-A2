@@ -1,0 +1,41 @@
+{% load staticfiles %}
+
+
+<HEAD>
+	<LINK rel="stylesheet" type="text/css" href="{% static 'vmmanager/style.css' %}">
+</HEAD>
+
+<h1>VM List</h1>
+
+<!-- <h2><a href="{% static 'vmmanager/test.html' %}" target="main">test_jump</a></li></h2> -->
+
+<table>
+
+{% for dom in vmdoms %}
+ <tr>
+  <td><a href="/vmmanager/status/{{ dom.name }}/" target="main">{{ dom.name }}</a></td>
+  {% if dom.info.0 == 1 %}<td>running</td>{% endif %}
+  {% if dom.info.0 == 5 %}<td>shut off</td>{% endif %}
+ </tr>
+{% endfor %}
+</table>
+
+<h2>
+	<a href='/vmmanager/create' target="main" >
+	<img src="{% static 'vmmanager/button_off.jpg' %}" alt="create" 
+	onmouseover = 'this.src="{% static 'vmmanager/button_on.jpg'  %}" '
+	onmouseout  = 'this.src="{% static 'vmmanager/button_off.jpg' %}" '
+	></a>
+</h2>
+
+<h2>
+	<a href='/vmmanager/index_top' target="main" >
+		return to top
+	</a>
+</h2>
+
+
+<body background="{% static 'vmmanager/b009.jpg' %}">
+
+
+</form>
