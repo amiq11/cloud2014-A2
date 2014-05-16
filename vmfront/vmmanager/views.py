@@ -31,7 +31,7 @@ def status(request, vmname):
 
 class VMForm(forms.Form):
         name = forms.CharField()
-        memory = forms.ChoiceField(choices=[(256,"256"), (512,"256"), (1024,"1024")])
+        memory = forms.ChoiceField(choices=[(256 * 1024, "256"), (512 * 1024, "512"), (1024 * 1024, "1024")])
         vcpu = forms.ChoiceField(choices=[(1, "1"), (2, "2"), (3, "3")])
         disk = forms.ChoiceField(choices=[(2, "2"), (5, "5"), (10, "10"), (20, "20")])
         os = forms.ChoiceField(choices=[("freebsd", "FreeBSD"), ("ubuntu", "Ubuntu"), ("centos", "CentOS"), ("debian", "Debian")])
@@ -107,9 +107,8 @@ D_XML = """\
         </os>
 
         <vcpu>%(vcpu)s</vcpu> <!-- CPU allocation -->
-        <memory unit='KiB'>262144</memory> <!-- Maximum Memory Allocation Size -->
-        <currentMemory unit='KiB'>262144</currentMemory> <!-- Current Memory Allocation -->
-
+        <memory unit='KiB'>%(memory)s</memory> <!-- Maximum Memory Allocation Size -->
+        <currentMemory unit='KiB'>%(memory)s</currentMemory> <!-- Current Memory Allocation -->
         <devices> <!-- devices provided to the guest domain -->
                 <emulator>/usr/bin/kvm</emulator> <!--  -->
                 <disk type='file' device='disk'> <!-- type:underlying source for the disk, device:how the disk is exposed to the guest OS -->
