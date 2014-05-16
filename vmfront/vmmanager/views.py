@@ -4,6 +4,7 @@ from xml.dom.minidom import parseString
 from django.core.context_processors import csrf
 from django import forms
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 
 import libvirt
 # Create your views here.
@@ -39,7 +40,8 @@ class VMForm(forms.Form):
 	def clean_name(self):
 		# Custom validation
 		# Check overlapping of domain name
-		con = libvirt.open('qemu:///system')
+		con = libvirt.open('qemu://157.82.3.140/system')
+		#con = libvirt.open('qemu:///system')
 		vm_names = []
 		for id in con.listDomainsID():
 			dom = con.lookupByID(id)
@@ -54,8 +56,9 @@ def create(request):
         if request.method == "POST":
                 form = VMForm(request.POST)
                 if form.is_valid():
-                        con = libvirt.open('qemu:///system')
-
+                        con = libvirt.open('qemu://157.82.3.140/system')
+			
+               	        # con = libvirt.open('qemu:///system')
 			# Create Volume
 			for name in  con.listStoragePools() :
 					pool = con.storagePoolLookupByName(name)
@@ -71,7 +74,8 @@ def create(request):
                         if status != -1:
                                 # TODO
                                 # return redirect to vnc
-                                pass
+                                return HttpResponseRedirect('/status/' + form.cleaned_data["name"])
+			   
         else:
                 form = VMForm()
 	c = {}
@@ -126,7 +130,7 @@ D_XML = """\
                         <mac address='24:42:53:21:52:45' />
                 </interface>
                 <graphics type='vnc' port='-1' keymap='ja' passwd="asdfghjkl">
-		  <!-- <listen type='address' address='157.82.3.140'/> -->
+			<listen type='address' address='157.82.3.140'/>
 		</graphics>
         </devices>
 

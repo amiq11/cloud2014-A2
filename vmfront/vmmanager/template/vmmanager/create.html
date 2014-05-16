@@ -1,4 +1,4 @@
-{% include 'vmmanager/header.html' %}
+{% include 'header.html' %}
 <div id="content">
 <h1>VM Createマンの部屋</h1>
 <ul class="note">
@@ -17,9 +17,9 @@
 	<td>
 	<select name="memory" style="width:50px">
 		<option value="">--</option>
-		<option value="256">256</option>
-		<option value="512">512</option>
-		<option value="1024">1024</option>
+		<option value="262144">256</option>
+		<option value="524288">512</option>
+		<option value="1048576">1024</option>
 	</select>
 	<span>MB</span>
 	</td>
@@ -67,8 +67,8 @@
 </table>
 </form>
 </div>
-{% include 'vmmanager/footer.html' %}
 
+{% include 'footer.html' %}
 <script type="text/javascript">
 <!--
 /*validate*/
