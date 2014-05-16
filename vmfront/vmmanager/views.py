@@ -43,11 +43,14 @@ def status(request, vmname):
         maxVcpus = dom.maxVcpus()
     elif dom.info()[0] == 5:
         vm_state = "shut off"
-        maxVcpus = None
+        maxVcpus = "(N/A)"
     else:
         vm_state = dom.info()[0]
-        maxVcpus = None
+        maxVcpus = "(N/A)"
 
+    graphics_port = parsed.getElementsByTagName('graphics')[0].getAttribute('port')
+    if graphics_port == "-1":
+        graphics_port = "(N/A)"
 
     if request.method == "POST":
 
@@ -79,7 +82,7 @@ def status(request, vmname):
                                   'vcpus': dom.vcpus(),
                                   'conGetMemoryStats': con.getMemoryStats(0,0),
                                   'conGetCPUStats': con.getCPUStats(0,0),
-                                  'graphics_port': parsed.getElementsByTagName('graphics')[0].getAttribute('port')
+                                  'graphics_port': graphics_port
                               }))
     
 

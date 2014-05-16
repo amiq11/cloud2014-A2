@@ -40,10 +40,6 @@
     <th>{{ maxMemory }} kB</th>
   </tr>
   <tr>
-    <th>usedMem</th>
-    <th>{{ "(TODO)" }}</th>
-  </tr>
-  <tr>
     <th>maxVcpus</th>
     <th>{{ maxVcpus }}</th>
   </tr>
@@ -52,8 +48,9 @@
     <th>{{ graphics_port }}</th>
   </tr>
 
-  <tr> <th> </br> </th> </tr>
   <!-- for reference -->
+  <!--
+  <tr> <th> </br> </th> </tr>
   <tr>
     <th>info</th>
     <th>{{ info }}</th>
@@ -79,6 +76,7 @@
     <th>conGetCPUStats</th>
     <th>{{ conGetCPUStats }}</th>
   </tr>
+  -->
  </tbody>
 </table>
 <form method="post" action="/vmmanager/status/{{dom.name}}/">
