@@ -47,22 +47,25 @@ def status(request, vmname):
         maxVcpus = dom.maxVcpus()
     elif dom.info()[0] == 5:
         vm_state = "shut off"
-        maxVcpus = None
+        maxVcpus = "(N/A)"
     else:
         vm_state = dom.info()[0]
-        maxVcpus = None
+        maxVcpus = "(N/A)"
 
+    graphics_port = parsed.getElementsByTagName('graphics')[0].getAttribute('port')
+    if graphics_port == "-1":
+        graphics_port = "(N/A)"
 
     if request.method == "POST":
 
         if 'PowerON' in request.POST:
             if vm_state == "shut off":
                 dom.create()
-            return HttpResponseRedirect(reverse('vmmanager.views.index_top'))
+            return HttpResponseRedirect(reverse('vmmanager.views.status', args=(vmname,)))
         elif 'shutdown' in request.POST:
             if vm_state == "running":
                 dom.destroy()
-            return HttpResponseRedirect(reverse('vmmanager.views.index_top'))
+            return HttpResponseRedirect(reverse('vmmanager.views.status', args=(vmname,)))
         
     
     #try:
@@ -83,7 +86,8 @@ def status(request, vmname):
                                   'vcpus': dom.vcpus(),
                                   'conGetMemoryStats': con.getMemoryStats(0,0),
                                   'conGetCPUStats': con.getCPUStats(0,0),
-                                  'graphics_port': parsed.getElementsByTagName('graphics')[0].getAttribute('port')
+                                  'graphics_port': graphics_port,
+                                  'OSType': dom.OSType(),
                               }))
     
 

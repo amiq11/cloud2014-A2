@@ -13,8 +13,6 @@
 <p>
 <a href="/vmmanager/status/{{dom.name}}/">status</a><br/>
 <a href="/vmmanager/vnc/{{dom.name}}/">vnc</a><br/>
-<a href="/vmmanager/status/{{dom.name}}/">status</a><br/>
-<a href="/vmmanager/status/{{dom.name}}/">status</a><br/>
 </p>
 </div>
 
@@ -32,19 +30,19 @@
     <th>{{ dom.name }}</th>
   </tr>
   <tr>
+    <th>OS_Type</th>
+    <th>{{ OSType }}</th>
+  </tr>
+  <tr>
     <th>State</th>
     <th>{{ vm_state }}</th>
   </tr>
   <tr>
-    <th>maxMemory</th>
+    <th>max_Memory</th>
     <th>{{ maxMemory }} kB</th>
   </tr>
   <tr>
-    <th>usedMem</th>
-    <th>{{ "(TODO)" }}</th>
-  </tr>
-  <tr>
-    <th>maxVcpus</th>
+    <th>max_VCPUs</th>
     <th>{{ maxVcpus }}</th>
   </tr>
   <tr>
@@ -52,8 +50,9 @@
     <th>{{ graphics_port }}</th>
   </tr>
 
-  <tr> <th> </br> </th> </tr>
   <!-- for reference -->
+  <!--
+  <tr> <th> </br> </th> </tr>
   <tr>
     <th>info</th>
     <th>{{ info }}</th>
@@ -79,6 +78,7 @@
     <th>conGetCPUStats</th>
     <th>{{ conGetCPUStats }}</th>
   </tr>
+  -->
  </tbody>
 </table>
 <form method="post" action="/vmmanager/status/{{dom.name}}/">
