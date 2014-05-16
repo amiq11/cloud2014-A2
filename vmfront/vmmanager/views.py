@@ -61,11 +61,11 @@ def status(request, vmname):
         if 'PowerON' in request.POST:
             if vm_state == "shut off":
                 dom.create()
-            return HttpResponseRedirect(reverse('vmmanager.views.index_top'))
+            return HttpResponseRedirect(reverse('vmmanager.views.status', args=(vmname,)))
         elif 'shutdown' in request.POST:
             if vm_state == "running":
                 dom.destroy()
-            return HttpResponseRedirect(reverse('vmmanager.views.index_top'))
+            return HttpResponseRedirect(reverse('vmmanager.views.status', args=(vmname,)))
         
     
     #try:
