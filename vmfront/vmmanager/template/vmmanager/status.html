@@ -1,9 +1,18 @@
 {% load staticfiles %}
+
+	<SCRIPT language="JavaScript">
+	function reload_frame()
+	{
+		parent.frames.menu.location.reload(true);
+	}
+	</SCRIPT>
+	
+
 <html>
 <head>
   <link href="{% static 'vmmanager/style.css'%}" rel="stylesheet" type="text/css"/>
 </head>
-<body background="{% static 'vmmanager/b009.jpg' %}">
+<body background="{% static 'vmmanager/b009.jpg' %}" onLoad="reload_frame()">
 
 
 

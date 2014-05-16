@@ -21,9 +21,11 @@ def create_virConnect():
         path = 'qemu+tls://g4hv.exp.ci.i.u-tokyo.ac.jp/system'
         con = libvirt.open(path)
         _hostname = path
+	print("Release VM")
     except:
         path = 'qemu:///system'
         con = libvirt.open(path)
         _hostname = path
+	print("Local VM")
 
     return con

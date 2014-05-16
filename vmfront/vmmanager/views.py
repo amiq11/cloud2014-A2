@@ -36,7 +36,8 @@ def index_top(request):
     return render_to_response('vmmanager/index_top.html')
 
 def status(request, vmname):
-    
+
+       
     con = create_virConnect()
     
     dom = con.lookupByName(vmname)
