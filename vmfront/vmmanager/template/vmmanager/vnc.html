@@ -134,7 +134,7 @@
 
             host = "{{ hostname }}";
             port = {{ port }};
-            password = "";
+            password = "{{ password }}";
             path = "websockify";
             rfb = new RFB({'target':       $D('noVNC_canvas'),
                            'encrypt':      WebUtil.getQueryVar('encrypt',

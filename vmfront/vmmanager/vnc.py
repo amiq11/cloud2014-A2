@@ -6,7 +6,7 @@ import threading
 import time
 import subprocess
 import os
-
+import socket
 from novnc.websockify import WebSocketProxy
 from vmmanager import get_virt_hostname, create_virConnect
 from urlparse import urlparse
@@ -26,16 +26,17 @@ def display(request, vmname):
         hostname = hostname.strip('[]')
     vncport = int(parsed.getElementsByTagName('graphics')[0].getAttribute('port'))
     wsport = vncport - 5900 + 26100
+    myipaddr = socket.gethostbyname(socket.gethostname())
     virthost = urlparse(get_virt_hostname()).netloc
     if virthost == '':
-        virthost = 'localhost'
+        virthost = myipaddr
     #### Start a Proxy Server using subprocess
     if _wsproxy != None:
-        _wsproxy.kill()
-        #_wsproxy.terminate()
+        _wsproxy.terminate()
+        time.sleep(1)
     path = os.path.join(os.path.dirname(__file__), 'novnc/websockify.py')
     command = '%s %s:%s %s:%s' % ( path,
-                                   'localhost',
+                                   myipaddr,
                                    wsport,
                                    virthost,
                                    vncport)
@@ -53,11 +54,13 @@ def display(request, vmname):
     # _wsproxy.start()
     
     #time.sleep(10)
+    print('wsport: %d, hostname: %s'%(wsport, hostname))
     return render_to_response('vmmanager/vnc.html',
                               {
                                   'dom': dom,
                                   'port': wsport,
-                                  'hostname': hostname
+                                  'hostname': hostname,
+                                  'password': 'asdfghjkl'
                               })
 
 class VNCWSProxy(object):
