@@ -1,4 +1,10 @@
-{% include 'header.html' %}
+{% load staticfiles %}
+<html>
+<head>
+  <link href="{% static 'vmmanager/style.css' %}" rel="stylesheet" type="text/css"/>
+  <link href="{% static 'vmmanager/create.css' %}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
 <div id="content">
 <h1>VM Createマンの部屋</h1>
 <ul class="note">
@@ -68,7 +74,6 @@
 </form>
 </div>
 
-{% include 'footer.html' %}
 <script type="text/javascript">
 <!--
 /*validate*/
@@ -104,3 +109,5 @@ function validate(){
 
 -->
 </script>
+</body>
+</html>
