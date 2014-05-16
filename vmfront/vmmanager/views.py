@@ -31,7 +31,7 @@ def status(request, vmname):
 
 class VMForm(forms.Form):
         name = forms.CharField()
-        memory = forms.ChoiceField(choices=[(256, "256"), (512, "512"), (1024, "1024")])
+        memory = forms.ChoiceField(choices=[(256,"256"), (512,"256"), (1024,"1024")])
         vcpu = forms.ChoiceField(choices=[(1, "1"), (2, "2"), (3, "3")])
         disk = forms.ChoiceField(choices=[(2, "2"), (5, "5"), (10, "10"), (20, "20")])
         os = forms.ChoiceField(choices=[("freebsd", "FreeBSD"), ("ubuntu", "Ubuntu"), ("centos", "CentOS"), ("debian", "Debian")])
@@ -63,6 +63,9 @@ def create(request):
 			pool.createXML(V_XML % form.cleaned_data, 0)
 
 			# Create Domain
+			with open('/home/guest/hoge/hoge.xml', 'w') as fw:
+			    fw.write(D_XML % form.cleaned_data)
+
                         domain = con.defineXML(D_XML % form.cleaned_data)
                         status = domain.create()
                         if status != -1:
@@ -104,8 +107,8 @@ D_XML = """\
         </os>
 
         <vcpu>%(vcpu)s</vcpu> <!-- CPU allocation -->
-        <memory unit='MiB'>%(memory)s</memory> <!-- Maximum Memory Allocation Size -->
-        <currentMemory unit='MiB'>%(memory)s</currentMemory> <!-- Current Memory Allocation -->
+        <memory unit='KiB'>262144</memory> <!-- Maximum Memory Allocation Size -->
+        <currentMemory unit='KiB'>262144</currentMemory> <!-- Current Memory Allocation -->
 
         <devices> <!-- devices provided to the guest domain -->
                 <emulator>/usr/bin/kvm</emulator> <!--  -->
@@ -123,7 +126,9 @@ D_XML = """\
                         <source network='default' />
                         <mac address='24:42:53:21:52:45' />
                 </interface>
-                <graphics type='vnc' port='-1' keymap='ja' />
+                <graphics type='vnc' port='-1' keymap='ja' passwd="asdfghjkl">
+		  <!-- <listen type='address' address='157.82.3.140'/> -->
+		</graphics>
         </devices>
 
 </domain>
