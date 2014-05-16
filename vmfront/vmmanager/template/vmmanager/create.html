@@ -1,8 +1,113 @@
 {% load staticfiles %}
+<html>
+<head>
+  <link href="{% static 'vmmanager/style.css' %}" rel="stylesheet" type="text/css"/>
+  <link href="{% static 'vmmanager/create.css' %}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="content">
+<h1>VM Createマンの部屋</h1>
+<ul class="note">
+	<li><span class="needed"></span>は入力必須でやんす</li>
+</ul>
+<form id="vmcreate" action="." method="POST">
+{% csrf_token %}
+<table>
+<tbody>
+	<tr>
+	<th>VM名<span class="needed"></span></th>
+	<td><input name="name" type="text" value="" /></td>	
+	</tr>
+	<tr>	
+	<th>メモリ容量<span class="needed"></span></th>
+	<td>
+	<select name="memory" style="width:50px">
+		<option value="">--</option>
+		<option value="262144">256</option>
+		<option value="524288">512</option>
+		<option value="1048576">1024</option>
+	</select>
+	<span>MB</span>
+	</td>
+	</tr>
+	<tr>
+	<th>CPU数<span class="needed"></span></th>
+	<td>
+	<select name="vcpu" style="width:50px">
+		<option value="">--</option>
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+	</select>
+	</td>
+	</tr>
+	<tr>
+	<th>ディスク容量<span class="needed"></span></th>
+	<td>
+	<select name="disk" style="width:50px">
+		<option value="">--</option>
+		<option value="2">2</option>
+		<option value="5">5</option>
+		<option value="10">10</option>
+		<option value="20">20</option>
+	</select>
+	<span>GB</span>
+	</td>
+	</tr>
+	<tr>
+	<th>OS<span class="needed"></span></th>
+	<td>
+	<select name="os">
+		<option value="">--</option>
+		<option value="ubuntu">Ubuntu</option>
+		<option value="debian">Debian</option>
+		<option value="freebsd">FreeBSD</option>
+		<option value="centos">CentOS</option>
+	</td>
+	</tr>
+	<tr>
+	<th colspan="2"><input type="button" value="VM作る!" onclick="validate()"/></th>
+	</tr>
+	
+</tbody>
+</table>
+</form>
+</div>
 
-<h1>VM Create</h1>
-<body background="{% static 'vmmanager/b009.jpg' %}">
+<script type="text/javascript">
+<!--
+/*validate*/
+function validate(){
 
-つくっちゃうよ(´◔౪◔)۶ﾖｯｼｬ!
+	input = document.getElementsByName("name");
+	select = document.getElementsByTagName("select");
+	valid = true;
+	for(var i = 0; i < select.length; i++) {
+		selectOptions = select[i].options; 
+		if (selectOptions.item(select[i].selectedIndex).value == "") {
+			valid = false;
+		}
+	}
+	if (input[0].value == "") {
+		valid = false;
+	}
+	
+	if (!valid) {
+		alert("全部必須だよ！この豚野郎！！");
+		return ;
+	}	
 
+	
+	bool = window.confirm("本当に作っちゃう？？");
+	if(bool)
+		document.getElementById('vmcreate').submit();
+	else
+		;
 
+	return;
+}
+
+-->
+</script>
+</body>
+</html>
