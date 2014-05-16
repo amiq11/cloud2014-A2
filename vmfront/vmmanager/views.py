@@ -123,15 +123,12 @@ def create(request):
 			pool.createXML(V_XML % form.cleaned_data, 0)
 
 			# Create Domain
-			with open('/home/guest/hoge/hoge.xml', 'w') as fw:
-			    fw.write(D_XML % form.cleaned_data)
-
                         domain = con.defineXML(D_XML % form.cleaned_data)
                         status = domain.create()
                         if status != -1:
                                 # TODO
                                 # return redirect to vnc
-                                return HttpResponseRedirect('/status/' + form.cleaned_data["name"])
+                                return HttpResponseRedirect(reverse('vmmanager.views.status', args=(form.cleaned_data["name"],)))
 			   
         else:
                 form = VMForm()
@@ -177,7 +174,7 @@ D_XML = """\
                         <target dev='hda' />
                 </disk>
                 <disk type='file' device='cdrom'>
-                        <source file='/var/local/kvm/installer/debian-7.5.0-amd64-netinst.iso' />
+                        <source file='/var/shared/debian-7.5.0-amd64-netinst.iso' />
                         <target dev='hda' />
                         <readonly/>
                         <address type='drive' controller='0' bus='1' target='0' unit='0'/>
