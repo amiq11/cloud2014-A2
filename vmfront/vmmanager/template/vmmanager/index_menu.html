@@ -9,12 +9,16 @@
 
 <!-- <h2><a href="{% static 'vmmanager/test.html' %}" target="main">test_jump</a></li></h2> -->
 
-<ul>
+<table>
 
 {% for dom in vmdoms %}
-  <li><a href="/vmmanager/status/{{ dom.name }}/" target="main">{{ dom.name }}</a></li>
+ <tr>
+  <td><a href="/vmmanager/status/{{ dom.name }}/" target="main">{{ dom.name }}</a></td>
+  {% if dom.info.0 == 1 %}<td>running</td>{% endif %}
+  {% if dom.info.0 == 5 %}<td>shut off</td>{% endif %}
+ </tr>
 {% endfor %}
-</ul>
+</table>
 
 <h2>
 	<a href='/vmmanager/create' target="main" >

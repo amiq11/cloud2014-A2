@@ -9,20 +9,13 @@
 		<LINK rel="stylesheet" type="text/css" href="{% static 'vmmanager/style.css' %}">
 	</HEAD>
 	
-	<SCRIPT language="JavaScript">
-	function reload_frame()
-	{
-		frames["menu"].location.reload();
-	}
-	</SCRIPT>
-	
 	<FRAMESET rows="50,*,20" cols="*" frameborder="1" border="1" framespacing="0" >
 		
 		<FRAME src="{% static 'vmmanager/header.html' %}" name="header" marginwidth="0" marginheight="0" frameBorder="1" noresize scrolling="NO" allowtransparency="true">
 		
 		<FRAMESET cols="200,*" rows="*" frameborder="1" border="1" framespacing="0"  >
 			<FRAME src="/vmmanager/index_menu/"	name="menu" marginwidth="0" marginheight="0" frameBorder="1" noresize scrolling="NO" allowtransparency="true" target="main">
-			<FRAME src="/vmmanager/index_top/"		name="main" marginwidth="0" marginheight="0" frameBorder="0" noresize allowtransparency="true" onLoad="reload_frame()">
+			<FRAME src="/vmmanager/index_top/"	name="main" marginwidth="0" marginheight="0" frameBorder="0" noresize allowtransparency="true" >
 			<BODY>
 				<NOFRAMES><P>This page requires a browser which supports FRAME.</P></NOFRAMES>
 				
