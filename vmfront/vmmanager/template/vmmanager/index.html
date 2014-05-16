@@ -1,9 +1,14 @@
 <h1>VM Manager</h1>
-<ul>
+
+<table>
 {% for dom in vmdoms %}
-  <li><a href="/vmmanager/status/{{ dom.name }}/">{{ dom.name }}</a></li>
+ <tr>
+  <td><a href="/vmmanager/status/{{ dom.name }}/">{{ dom.name }}</a></td>
+  {% if dom.info.0 == 1 %}<td>running</td>{% endif %}
+  {% if dom.info.0 == 5 %}<td>shut off</td>{% endif %}
+ </tr>
 {% endfor %}
-</ul>
+</table>
 
 <form action="/vmmanager/create/" method="post">
 {% csrf_token %}

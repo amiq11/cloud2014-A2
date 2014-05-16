@@ -80,11 +80,10 @@
   {% csrf_token %}
   <input type="submit" value="shutdown">
 </form>
-
 <form method="post" action="/vmmanager/status/{{dom.name}}/">
-   <input type="hidden" name="PowerON" value="true">
-   {% csrf_token %}
-   <input type="submit" value="PowerON">
+  <input type="hidden" name="PowerON" value="true">
+  {% csrf_token %}
+  <input type="submit" value="PowerON">
 </form>
 
 </div>

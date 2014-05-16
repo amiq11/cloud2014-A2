@@ -38,17 +38,23 @@ def status(request, vmname):
         vm_state = dom.info()[0]
         maxVcpus = None
 
-    try:
-        if request.POST["shutdown"] == "true":
+
+    if request.method == "POST":
+
+        if 'PowerON' in request.POST:
+            dom.create()
+            return HttpResponseRedirect(reverse('vmmanager.views.index'))
+        elif 'shutdown' in request.POST:
             dom.destroy()
             return HttpResponseRedirect(reverse('vmmanager.views.index'))
+        
+    
+    #try:
+    #    value = request.POST["PowerON"]
 
-#    except request.POST["PowerON"] == "true":
-#        dom.start()
-#        return HttpResponseRedirect(reverse('vmmanager.views.index'))
+    #except KeyError:
         
-    except KeyError:
-        
+    else:
         return render_to_response('vmmanager/status.html',
                                   context_instance=RequestContext(request, {
                                   'dom': dom,
@@ -64,11 +70,6 @@ def status(request, vmname):
                                   'graphics_port': parsed.getElementsByTagName('graphics')[0].getAttribute('port')
                               }))
     
-    else:
-        if request.POST["PowerON"] == "true":
-            dom.create()
-            return HttpResponseRedirect(reverse('vmmanager.views.index'))
-        
 
 def create(request):
     return render_to_response('vmmanager/create.html')
