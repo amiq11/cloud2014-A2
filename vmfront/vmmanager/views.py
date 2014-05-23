@@ -165,8 +165,8 @@ D_XML = """\
 
         <os> <!-- Bootloader -->
                 <type>hvm</type>  <!-- Full Virtualization -->
-                <boot dev='cdrom'/> <!-- Boot Device -->
                 <boot dev='hd' />
+                <boot dev='cdrom'/> <!-- Boot Device -->
         </os>
 
         <vcpu>%(vcpu)s</vcpu> <!-- CPU allocation -->
